@@ -1,0 +1,25 @@
+{
+  "name": "reactiv-take-home",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "pnpm --filter @reactiv/contracts typecheck && pnpm --filter @reactiv/config-service typecheck && pnpm --filter @reactiv/editor typecheck",
+    "test": "pnpm --filter @reactiv/contracts build && pnpm -r --if-present run test",
+    "test:boundary": "playwright test --config playwright.boundary.config.ts",
+    "test:journeys": "playwright test --config playwright.journeys.config.ts",
+    "dev": "pnpm --filter @reactiv/contracts build && pnpm run --parallel dev:editor:serve dev:service:serve",
+    "dev:editor": "pnpm --filter @reactiv/contracts build && pnpm run dev:editor:serve",
+    "dev:editor:serve": "node scripts/with-env.mjs pnpm --filter @reactiv/editor dev",
+    "dev:service": "pnpm --filter @reactiv/contracts build && pnpm run dev:service:serve",
+    "dev:service:serve": "node scripts/with-env.mjs pnpm --filter @reactiv/config-service dev",
+    "db:migrate": "pnpm --filter @reactiv/config-service db:migrate",
+    "db:seed": "pnpm --filter @reactiv/contracts build && pnpm --filter @reactiv/config-service db:seed"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0"
+  }
+}

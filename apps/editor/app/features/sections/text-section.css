@@ -1,0 +1,71 @@
+.text-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.text-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.text-field label {
+  font-weight: 500;
+}
+
+.text-field input,
+.text-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--rx-ink, #13100d);
+  border-radius: var(--rx-radius-field, 8px);
+  background: var(--rx-paper, #ffffff);
+  color: var(--rx-ink, #13100d);
+  font: inherit;
+  line-height: 1.4;
+}
+
+.text-field textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.field-error,
+.contrast-warning {
+  margin: 0;
+}
+
+.field-error {
+  color: var(--rx-error, #3b0b0b);
+}
+
+.contrast-warning {
+  color: var(--rx-warning, #5e5515);
+}
+
+.preview-text {
+  min-width: 0;
+  padding: 4px 0 12px;
+}
+
+.preview-text-title,
+.preview-text-description {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.preview-text-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.preview-text-description {
+  margin-top: 8px;
+  white-space: pre-wrap;
+  line-height: 1.45;
+}

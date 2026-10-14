@@ -1,0 +1,29 @@
+.color-field-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.color-field-row > input[type="text"] {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+}
+
+.color-field-row > input.color-picker {
+  flex: 0 0 2.75rem;
+  box-sizing: border-box;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.2rem;
+  border: 1px solid var(--rx-ink, #13100d);
+  border-radius: var(--rx-radius-field, 8px);
+  background: var(--rx-paper, #ffffff);
+  cursor: pointer;
+}
+
+.color-field-row > input.color-picker:focus-visible {
+  outline: 3px solid var(--rx-olive, #4a5e30);
+  outline-offset: 2px;
+}

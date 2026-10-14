@@ -1,0 +1,42 @@
+# The configuration service is private. It is not a public port.
+# When the service runs under Compose, publish it on 127.0.0.1 only.
+# Do not commit a service token. CONFIG_SERVICE_TOKEN comes from the environment.
+# This prompt does not build an application image and does not start Postgres.
+# `pnpm dev:service` is the local process. The config-service container is behind
+# the config-service profile and its entrypoint exits on purpose so Compose
+# cannot be mistaken for the API. `docker compose up` starts Postgres only.
+
+name: reactiv
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: reactiv
+      POSTGRES_PASSWORD: reactiv
+      POSTGRES_DB: reactiv
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - reactiv_pg:/var/lib/postgresql/data
+
+  config-service:
+    profiles: ["config-service"]
+    image: node:22-bookworm-slim
+    entrypoint:
+      - node
+      - -e
+      - "process.stderr.write('The config-service image is not built in this prompt. Start it with pnpm dev:service.'); process.exit(1)"
+    environment:
+      CONFIG_SERVICE_TOKEN: ${CONFIG_SERVICE_TOKEN}
+      DATABASE_URL: ${DATABASE_URL}
+      HOST: 0.0.0.0
+      PORT: "4001"
+    ports:
+      - "127.0.0.1:4001:4001"
+    depends_on:
+      - postgres
+
+volumes:
+  reactiv_pg:
+    name: reactiv_pg
